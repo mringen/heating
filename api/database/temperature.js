@@ -9,16 +9,17 @@ function getTemperature(callback) {
 	// list my sensor device/devices unique id
 	fs.readFile(path_sensor, 'utf8', function(err, data) {
 		if (err) {
-			console.log('error: ', err);
+			console.log('error find sensor id: ', err);
 			return callback(err);
 		}
 		let sensorId = data.split('\n');
 		sensorId.pop();
 
 		// read temperature data and translate to celsius and fahrenheit, and add timestamp
+		// later upload response temp to DB without change it to celsius/fahrenheit
 		fs.readFile('/sys/bus/w1/devices/' + sensorId + '/w1_slave', 'utf8', function(err, temp) {
 			if(err) {
-				console.log('error: ', err);
+				console.log('error use sensor id: ', err);
 				return;
 			}
 
