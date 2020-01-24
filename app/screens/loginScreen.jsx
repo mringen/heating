@@ -5,7 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import styles from '../styles/loginStyle';
 
 const LoginScreen = (props) =>  {
-	const [serverIpValue, setServerIp] = React.useState('172.16.9.94');
+	const [serverIpValue, setServerIp] = React.useState('172.16.9.67');
 	const [localIpValue, setLocalIp] = React.useState('');
 
 	const login = () => {
