@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Button, Text, View } from 'react-native';
-import {fetchLastRun} from '../../functions/fetchLastRun';
-import DisplayLastRun from '../displayLastRun/displayLastRun';
+// import {fetchLastRun} from '../functions/fetchLastRun';
+import DisplayLastRun from './displayLastRun';
 
 const LastRun = (props) => {
 	const [data, setData] = useState();
@@ -15,7 +15,6 @@ const LastRun = (props) => {
 			setData(JSON.stringify(json))
 		})
 	}
-
 	return(
 		<div> Last run {props.serverIp}
 			<div>
