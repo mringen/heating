@@ -5,13 +5,20 @@ import {createStackNavigator} from 'react-navigation-stack';
 import styles from '../styles/loginStyle';
 
 const LoginScreen = (props) =>  {
-	console.log('style: ' , styles.container)
+	const [serverIpValue, setServerIp] = React.useState('172.16.9.94');
+	const [localIpValue, setLocalIp] = React.useState('');
+
+	const login = () => {
+		console.log('state serverIpValue: ', serverIpValue, localIpValue)
+		props.navigation.navigate('Home', { serverIpValue, localIpValue });
+	}
+
 	return(
 		<View style={styles.container}>
 			<Text>You are on login screen, enter the ip adress!</Text>
-			<TextInput placeholder="rasperry IP address" />
-			<TextInput placeholder="computers IP address" />
-			<Button title="Login" onPress={() => props.navigation.navigate('Home')} />
+			<TextInput value={serverIpValue} placeholder="rasperry IP address"  onChangeText={text => setServerIp(text)} />
+			<TextInput value={localIpValue} placeholder="computers IP address" onChangeText={text => setLocalIp(text)} />
+			<Button title="Login" onPress={() => login()} />
 		</View>
 	)
 }

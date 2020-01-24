@@ -5,7 +5,7 @@ const settings = { useNewUrlParser: true,  useUnifiedTopology: true };
 
 function getAllDataMongoDB (callback) {
 	MongoClient.connect(uri, settings, (error, client) => {
-		if(error) { throw error }
+		if(error) {	throw error }
 
 		let collection = client.db('heating').collection('temprature');
 		collection.find().toArray((error, response) => {
