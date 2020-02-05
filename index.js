@@ -1,18 +1,22 @@
-import { AppRegistry } from 'react-native';
-import React from 'react';
+import React, { Component } from 'react';
 import App from './App';
-import LoginScreen from './app/screens/LoginScreen'
 import { name as appName } from './app.json';
-import { Provider } from 'react-redux';
+import { AppRegistry, Dimensions } from 'react-native';
+import { DrawerNavigator } from 'react-navigation';
 
-import configureStore from './store';
+// import {createBottomTabNavigator} from 'react-navigation-tabs';
+// import {TabBar} from 'react-native-tab-view';
 
-const store = configureStore()
+import SideMenu from './app/components/SideMenu/SideMenu'
+import Navigation from './app/navigation/navigation';
 
-const RNRedux = () => (
-  <Provider store = { store }>
-    <App />
-  </Provider>
-)
+const drawernav = DrawerNavigator({
+  Item1: {
+      screen: stackNav,
+    }
+  }, {
+    contentComponent: SideMenu,
+    drawerWidth: Dimensions.get('window').width - 120,
+});
 
-AppRegistry.registerComponent(appName, () => RNRedux);
+AppRegistry.registerComponent(appName, () => drawernav);

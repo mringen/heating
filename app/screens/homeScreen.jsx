@@ -1,23 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Button, Text, View } from 'react-native';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
 
-import LastRun from '../components/displayLastRun/lastRun';
+import DisplayLastRun from '../components/displayHome/DisplayLastRun';
+import {fetchAllHistory} from '../functions/fetchAllHistory';
 
-const HomeScreen = (props) => {
-	let serverIp = props.navigation.getParam('serverIpValue')
-	let localIp = props.navigation.getParam('localIpValue')
+const HomeScreen = ({navigation}) => {
+	let serverIp = navigation.getParam('serverIpValue')
+	const [dataHistory, setDataHistory] = useState();
+
+	useEffect(() => {
+		fetchAllHistory(serverIp)
+		.then(res => setDataHistory(res))
+	},[])
+
 	return(
 		<View>
-			<LastRun serverIp={serverIp} localIp={localIp}></LastRun>
-			<Text>You are on home screen, you want to start a program or create one!</Text>
-			<Button title="Go to login" onPress={() => props.navigation.navigate('Login')} />
-			<Button title="Go to createNew" onPress={() => props.navigation.navigate('CreateNew')} />
-			<Button title="Go to History" onPress={() => props.navigation.navigate('History')} />
-			<Button title="Go to RunProgram" onPress={() => props.navigation.navigate('RunProgram', { serverIp })} />
+			<DisplayLastRun dataHistory={dataHistory}></DisplayLastRun>
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	background: {
+		backgroundColor: 'green',
+	},
+	border: {
+		flex: 1,
+		margin: 10,
+		backgroundColor: '#FF9800',
+		borderWidth: 1,
+	},
+});
 
 export default HomeScreen
