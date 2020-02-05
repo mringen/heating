@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Button, TextInput} from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import CreateNewSection from './createNewSection';
 
-const CreateNew = () => {
+const CreateNew = ({navigation}) => {
 	const [numberOfSections, setNumberOfSections] = useState([{time: '111', temp: '2222'}]);
 
 	const addSection = () => {
@@ -18,8 +19,9 @@ const CreateNew = () => {
 		<View>
 			{renderNewSection}
 			<Button title="Add new section" onPress={() => addSection()} />
-		</View>
+			<Button title="Go to Run" onPress={() => navigation.navigate('Run')} />
+	</View>
 	)
 }
 
-export default CreateNew
+export default withNavigation(CreateNew);

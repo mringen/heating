@@ -16,12 +16,12 @@ import json
 try:
 	RELAIS_1_GPIO = int(sys.argv[2])
 	GPIO.setup(RELAIS_1_GPIO, GPIO.OUT) # GPIO Assign mode
-	GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) # on
+	# GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) # on
 	sleep(1)
 	GPIO.output(RELAIS_1_GPIO, GPIO.LOW) # out
 except KeyboardInterrupt:
 	print("except KeyboardInterrupt, clean up")
 	GPIO.cleanup()
-# finally:
-#    print("finally, clean up")
-#    GPIO.cleanup() # cleanup all GPIO
+finally:
+   print("finally, clean up")
+   GPIO.cleanup() # cleanup all GPIO

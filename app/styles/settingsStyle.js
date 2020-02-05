@@ -5,7 +5,8 @@ module.exports = StyleSheet.create({
 
 	container: {
 		flex: 1,
-		backgroundColor: '#9FA8DA',
+		justifyContent: 'center',
+		backgroundColor: '',
 		height: 100,
 	},
 });
