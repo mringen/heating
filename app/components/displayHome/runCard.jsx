@@ -7,8 +7,12 @@ const RunCard = ( {dataHistory, navigation} ) => {
 	return (
 		<TouchableHighlight onPress={() => navigation.navigate('History', {data: dataHistory})}>
 			<View style={styles.runCard}>
-				<Text>Program: {dataHistory.name}</Text><br />
-				<Text>Run time: {dataHistory.run_time} min</Text><br />
+				<View style={styles.viewText}>
+					<Text style={styles.text}>Program: {dataHistory.name}</Text><br />
+				</View>
+				<View style={styles.viewText}>
+					<Text style={styles.text}>Run time: {dataHistory.run_time} min</Text><br />
+				</View>
 			</View>
 		</TouchableHighlight>
 	)
@@ -16,15 +20,24 @@ const RunCard = ( {dataHistory, navigation} ) => {
 
 const styles = StyleSheet.create({
 	runCard: {
-		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		backgroundColor: 'dark-white',
-		margin: 10,
-		borderWidth: 1,
+		backgroundColor: '#ff5c5c',
+		margin: 5,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 5,
+		},
+		shadowOpacity: 0.34,
+		shadowRadius: 6.27,
+		elevation: 10,
 	},
-	fullLength: {
-		flex: 1,
+	viewText: {
+		flex: 2,
+	},
+	text: {
+		alignContent: 'flex-end',
 	}
 });
 
