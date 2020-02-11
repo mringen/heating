@@ -8,14 +8,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-community/masked-view": "^0.1.6",
+    "@react-native-community/masked-view": "^0.1.5",
     "expo": "~36.0.0",
     "express": "^4.17.1",
     "link": "^0.1.5",
     "mem": "^6.0.1",
     "mongodb": "^3.5.2",
     "native-base": "^2.13.8",
-    "react": "~16.9.0",
+    "react": "^16.8.6",
     "react-dom": "~16.9.0",
     "react-native": "^0.61.5",
     "react-native-drawer": "^2.5.1",
