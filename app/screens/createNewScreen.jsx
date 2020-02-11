@@ -5,10 +5,16 @@ import CreateNew from '../components/displayCreateNew/createNew';
 
 const CreateNewScreen = (props) => {
 	return(
-		<View>
+		<View style={styles.view}>
 			<CreateNew></CreateNew>
 		</View>
 	)
 }
 
+const styles = StyleSheet.create({
+	view: {
+		flex: 1,
+		backgroundColor: '#271F30'
+	},
+});
 export default CreateNewScreen

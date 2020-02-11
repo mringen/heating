@@ -6,23 +6,22 @@ const CreateNewProgram = (props) => {
 	return(
 		<View style={styles.border}>
 			<Text style={styles.text}>Make your own program</Text>
-			<Button title="Create new" onPress={() => props.navigation.navigate('Create')} />
+			<Button color="#ff5c5c" title="Create new" onPress={() => props.navigation.navigate('Create')} />
 	</View>
 	)
 }
 
 const styles = StyleSheet.create({
 	border: {
-		flex: 1,
 		margin: 10,
-		backgroundColor: 'white',
-		borderWidth: 1,
+		backgroundColor: '#F0D3F7',
 	},
 	text: {
-		margin: 10,
+		marginBottom: 10,
 	},
 	button: {
-
+		margin: 10,
+		backgroundColor: '#C8AD55',
 	}
 });
 

@@ -1,19 +1,33 @@
 import React from 'react';
-import {StyleSheet, View, Button, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Text} from 'react-native';
 
-const CreateNewSection = (props) => {
+const CreateNewSection = ({updateState, time, temp, index}) => {
 	return (
-		<div>
-			<div>
-				<span>Timer first step</span>
-				<TextInput value={props.time} placeholder="Time" />
-			</div>
-			<div>
-				<span>Temperature first step</span>
-				<TextInput value={props.temp} placeholder="Temp" />
-			</div>
-		</div>
+		<View style={styles.View}>
+			<Text style={styles.text}>Step: {index}</Text>
+			<Text style={styles.text}>Add Timer</Text>
+			<TextInput style={styles.textInput} value={time} placeholder="Time" onChangeText={val => updateState('time', val, index)} />
+			<Text style={styles.text}>Add temperature</Text>
+			<TextInput style={styles.textInput} value={temp} placeholder="Temp" onChangeText={val => updateState('temp', val, index)} />
+		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	view: {
+		margin: 10,
+		backgroundColor: '#F0D3F7',
+	},
+	text: {
+		marginBottom: 10,
+		color: '#F5E5FC',
+		fontSize: 15,
+	},
+	textInput: {
+		backgroundColor: '#F5E5FC',
+		height: 40,
+		marginBottom: 10,
+	},
+});
 
 export default CreateNewSection

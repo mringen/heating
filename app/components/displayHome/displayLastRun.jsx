@@ -12,7 +12,7 @@ const DisplayLastRun = ({dataHistory}) => {
 			firstRun = <LastRunCard dataHistory={dataHistory[0]}></LastRunCard>
 			otherRuns = [];
 			for(let i=1; i<dataHistory.length; i++) {
-				otherRuns.push( <RunCard dataHistory={dataHistory[i]} key={dataHistory[i]._id} /> );
+				otherRuns.push( <RunCard dataHistory={dataHistory[i]} key={dataHistory[i]._id}/> );
 			}
 		}
 
@@ -21,7 +21,9 @@ const DisplayLastRun = ({dataHistory}) => {
 			<View style={[firstRun ? styles.border : null]}>
 				{firstRun}
 			</View>
-			<CreateNewProgram></CreateNewProgram>
+			<View style={styles.border}>
+				<CreateNewProgram></CreateNewProgram>
+			</View>
 			<View style={[otherRuns ? styles.border : null]}>
 				{otherRuns}
 			</View>
@@ -31,10 +33,8 @@ const DisplayLastRun = ({dataHistory}) => {
 
 const styles = StyleSheet.create({
 	border: {
-		flex: 1,
 		margin: 10,
-		backgroundColor: 'white',
-		borderWidth: 1,
+		backgroundColor: '#F0D3F7',
 	},
 });
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Button, Text, View } from 'react-native';
 
-import DisplayLastRun from '../components/displayHome/DisplayLastRun';
+import DisplayLastRun from '../components/displayHome/displayLastRun';
 import {fetchAllHistory} from '../functions/fetchAllHistory';
 
 const HomeScreen = ({navigation}) => {
@@ -14,21 +14,16 @@ const HomeScreen = ({navigation}) => {
 	},[])
 
 	return(
-		<View>
+		<View style={styles.view}>
 			<DisplayLastRun dataHistory={dataHistory}></DisplayLastRun>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	background: {
-		backgroundColor: 'green',
-	},
-	border: {
+	view: {
 		flex: 1,
-		margin: 10,
-		backgroundColor: '#FF9800',
-		borderWidth: 1,
+		backgroundColor: '#271F30'
 	},
 });
 
