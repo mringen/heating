@@ -4,6 +4,7 @@ import { StyleSheet, View, Button, Text } from 'react-native';
 import LastRunCard from './lastRunCard';
 import RunCard from './runCard';
 import CreateNewProgram from './createNewProgram';
+import FetchCard from './fetchCard';
 
 const DisplayLastRun = ({dataHistory}) => {
 	let firstRun, otherRuns;
@@ -18,6 +19,8 @@ const DisplayLastRun = ({dataHistory}) => {
 		for(let i=1; i<dataHistory.length; i++) {
 			otherRuns.push( <RunCard dataHistory={dataHistory[i]} key={dataHistory[i]._id}/> )
 		}
+	} else {
+		firstRun = <FetchCard fetchData={fetchData}></FetchCard>
 	}
 
 	return (
@@ -40,11 +43,6 @@ const styles = StyleSheet.create({
 		margin: 10,
 		backgroundColor: '#F0D3F7',
 	},
-	text: {
-		margin: 10,
-		color: 'white',
-		backgroundColor: 'lightBlue'
-	}
 });
 
 export default DisplayLastRun;

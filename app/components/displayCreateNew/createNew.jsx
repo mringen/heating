@@ -1,23 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Button, TextInput, Text, TouchableHighlight} from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import CreateNewSection from './createNewSection';
 
 const CreateNew = ({navigation}) => {
-	const [numberOfSections, setNumberOfSections] = useState([{step: 1, time: '', temp: '20'}]);
+	const [numberOfSections, setNumberOfSections] = useState([{step: 1, time: '', temp: ''}]);
+
+	const updateState = (newText, valueName, index) => {
+		let testNumber = 1;
+		setNumberOfSections(
+			numberOfSections.map((section, i) => {
+				if( i+1 !== index )
+					return section;
+				return { ...section, [valueName]: newText }
+			})
+		)
+	}
 
 	const addSection = () => {
-		setNumberOfSections(numberOfSections.concat({step: numberOfSections.length + 1, time: '', temp: ''}))
+		setNumberOfSections([...numberOfSections, {step: numberOfSections.length + 1, time: '', temp: ''}])
 	}
 
 	const renderNewSection = numberOfSections.map((x, i)  => {
 		return ( <CreateNewSection updateState={updateState} time={x.time} temp={x.temp} index={i+1} key={i}></CreateNewSection>)
 	})
-
-	const updateState = () => {
-		console.log('later update state here')
-	}
 
 	return(
 		<View style={styles.view}>
