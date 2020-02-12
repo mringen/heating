@@ -6,9 +6,9 @@ const CreateNewSection = ({updateState, time, temp, index}) => {
 		<View style={styles.View}>
 			<Text style={styles.text}>Step: {index}</Text>
 			<Text style={styles.text}>Add Timer</Text>
-			<TextInput style={styles.textInput} value={time} placeholder="Time" onChangeText={val => updateState('time', val, index)} />
+			<TextInput style={styles.textInput} value={time} placeholder="Time" onChangeText={text => updateState(text, 'time', index)} />
 			<Text style={styles.text}>Add temperature</Text>
-			<TextInput style={styles.textInput} value={temp} placeholder="Temp" onChangeText={val => updateState('temp', val, index)} />
+			<TextInput style={styles.textInput} value={temp} placeholder="Temp" onChangeText={text => updateState(text, 'temp', index)} />
 		</View>
 	)
 }
