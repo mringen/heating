@@ -8,6 +8,7 @@ const exec = util.promisify(require('child_process').exec);
 
 const {getAllDataMongoDB} = require("./database/db.js");
 const {getTemperature} = require("./database/temperature.js");
+const {saveRecipeMongoDB} = require("./database/saveData.js")
 
 // server.use(cors());
 server.use(express.json());
@@ -41,6 +42,13 @@ server.get('/home', function(req, res) {
 		res.send(JSON.stringify(result));
 	});
 });
+
+server.post('/saveRecipe', function(req, res) {
+	console.log('query: ', req.body.recipeName)
+	saveRecipeMongoDB(req.body.recipeName.recipeName, req.body.recipeStep, result => {
+		res.send(JSON.stringify(result))
+	})
+})
 
 server.get('/run', (req,res) => {
 // 	switch( action ) {

@@ -5,12 +5,12 @@ import { withNavigation } from 'react-navigation';
 import CreateNewSection from './createNewSection';
 
 const CreateNew = ({navigation}) => {
-	const [numberOfSections, setNumberOfSections] = useState([{step: 1, time: '', temp: ''}]);
+	const [recipeName, setRecipeName] = useState('');
+	const [recipeStep, setRecipeStep] = useState([{step: 1, time: '', temp: ''}]);
 
 	const updateState = (newText, valueName, index) => {
-		let testNumber = 1;
-		setNumberOfSections(
-			numberOfSections.map((section, i) => {
+		setRecipeStep(
+			recipeStep.map((section, i) => {
 				if( i+1 !== index )
 					return section;
 				return { ...section, [valueName]: newText }
@@ -18,16 +18,32 @@ const CreateNew = ({navigation}) => {
 		)
 	}
 
-	const addSection = () => {
-		setNumberOfSections([...numberOfSections, {step: numberOfSections.length + 1, time: '', temp: ''}])
+	const updateRecipeName = (name) => {
+		setRecipeName({recipeName: name})
 	}
 
-	const renderNewSection = numberOfSections.map((x, i)  => {
+	const addSection = () => {
+		setRecipeStep([...recipeStep, {step: recipeStep.length + 1, time: '', temp: ''}])
+	}
+
+	const renderNewSection = recipeStep.map((x, i)  => {
 		return ( <CreateNewSection updateState={updateState} time={x.time} temp={x.temp} index={i+1} key={i}></CreateNewSection>)
 	})
 
+	const saveRecipe = async () => {
+		let url = `http://localhost:1337/saveRecipe`;
+		const response = await fetch(url, {method: 'POST', body: JSON.stringify({recipeName, recipeStep}), headers: {'Content-type': 'application/json'}})
+		const json = await response.json();
+		if(json.result.ok === 1) {
+			setRecipeName('')
+			setRecipeStep([{step: 1, time: '', temp: ''}])
+			console.log('Recipe is uploded')
+		}
+	}
+
 	return(
 		<View style={styles.view}>
+			<TextInput onChangeText={text => updateRecipeName(text)}></TextInput>
 			{renderNewSection}
 			<View style={styles.viewButton}>
 				<TouchableHighlight onPress={() => addSection()}>
@@ -37,7 +53,7 @@ const CreateNew = ({navigation}) => {
 				</TouchableHighlight>
 			</View>
 			<View>
-				<Button color="#ff5c5c" title="Go to Run" onPress={() => navigation.navigate('Run')} />
+				<Button color="#ff5c5c" title="Save recipe" onPress={() => saveRecipe()} />
 			</View>
 		</View>
 	)
