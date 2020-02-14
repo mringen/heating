@@ -8,7 +8,9 @@ const exec = util.promisify(require('child_process').exec);
 
 const {getAllDataMongoDB} = require("./database/db.js");
 const {getTemperature} = require("./database/temperature.js");
-const {saveRecipeMongoDB} = require("./database/saveData.js")
+const {saveRecipeMongoDB} = require("./database/saveData.js");
+const {getRecipesMongoDB} = require("./database/getRecipes.js");
+const {getRecipeMongoDB} = require("./database/getRecipe.js");
 
 // server.use(cors());
 server.use(express.json());
@@ -23,11 +25,7 @@ server.use((req, res, next) => {
   next();
 });
 
-// one call, read temperature
-// getTemperature(res => {
-// 	// later send up res-data to databasen
-// 	console.log('temperature: ', res)
-// });
+
 
 // // call every x-seconds, read tempearture
 // setInterval(function(){
@@ -44,25 +42,47 @@ server.get('/home', function(req, res) {
 });
 
 server.post('/saveRecipe', function(req, res) {
-	console.log('query: ', req.body.recipeName)
 	saveRecipeMongoDB(req.body.recipeName.recipeName, req.body.recipeStep, result => {
 		res.send(JSON.stringify(result))
 	})
 })
 
+server.get('/getRecipes', (req, res) => {
+	getRecipesMongoDB(result => {
+		res.send(JSON.stringify(result))
+	})
+})
+
+server.get('/getRecipe', (req, res) => {
+	getRecipeMongoDB(req.query.recipe, result => {
+		res.send(JSON.stringify(result))
+	})
+})
+
 server.get('/run', (req,res) => {
-// 	switch( action ) {
-// 		case 'tempUp':
-// 		//
-// 		case 'tempDown':
-// 		//
-// 		default:
-// //		case 'standby':
-// 			runCookingScript('standby', 23);
-// 			break;
-// 	}
-// 	runCookingScript(req.query.action, req.query.port);
-	res.send('Open relay module and closed in successfully');
+	switch( req.query.action ) {
+		case 'higher':
+			console.log('pyt higher')
+			// runCookingScript('higher', 23);
+			break;
+		case 'lower':
+			console.log('pyt lower')
+			// runCookingScript('lower', 23);
+			break;
+		case 'standby':
+			console.log('pyt standby')
+			// runCookingScript('standby', 23);
+			break;
+		case 'safety':
+			console.log('pyt safety')
+			// runCookingScript('safety', 23);
+			break;
+		default:
+			console.log('pyt default')
+			// runCookingScript('standby', 23);
+			break;
+	}
+	res.send('Open relay module and closed successfully');
 })
 
 async function runCookingScript(action, port) {

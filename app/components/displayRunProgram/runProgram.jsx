@@ -1,21 +1,46 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Button, Text, View, TextInput, TouchableHighlight} from 'react-native';
 import RunProgramCard from './runProgramCard';
+import RecipeListCard from './recipeListCard';
+import CookingButtons from './cookingButtons'
 
-const RunProgram = ({hotplateSettings}) => {
+const RunProgram = ({hotplateSettings, selectedRecipe, myRecipe, myRecipes, goBackToRecipes}) => {
 	const optionslist = ['safety', 'standby', 'higher', 'lower']
+	let listRecipe;
+
+
+	const startCooking = () => {
+		console.log('test runProgramCard')
+	}
 
 	const renderButtons = optionslist.map((option) => {
-		return <RunProgramCard hotplateSettings={hotplateSettings} option={option} key={option}></RunProgramCard>
+		return <CookingButtons hotplateSettings={hotplateSettings} option={option} key={option} />
 	})
+
+	if(myRecipe) {
+		listRecipe = ( <RunProgramCard startCooking={startCooking} goBackToRecipes={goBackToRecipes}></RunProgramCard> )
+	} else if(myRecipes.length > 0){
+		listRecipe = []
+		for (let i=0; i < myRecipes.length; i++) {
+			listRecipe.push( <RecipeListCard selectedRecipe={selectedRecipe} recipe={myRecipes[i]} key={i} /> )
+		}
+	} else{
+		listRecipe = ( <Text>Loding recipe</Text> )
+	}
+
+
 
 	return (
 		<View style={styles.view}>
 			<View style={styles.viewText}>
-				<Text style={styles.text}>Here you can start and follow active program</Text>
+				{listRecipe}
 			</View>
 			<View style={styles.viewButton}>
 				{renderButtons}
+
+			</View>
+			<View style={styles.viewText}>
+
 			</View>
 		</View>
 	)

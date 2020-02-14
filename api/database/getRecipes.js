@@ -3,18 +3,18 @@ const {uri} = require('../config/key.js')
 const {settings} = require('../config/Settings.js');
 
 
-const saveRecipeMongoDB = (recipeName, recipeStep, callback) => {
+const getRecipesMongoDB = (callback) => {
 	MongoClient.connect(uri, settings, (error, client) => {
 		if(error) {	throw error }
 
-		let collection = client.db('recipe').collection(recipeName);
-		collection.insertMany(recipeStep, (error, result) => {
+		let collection = client.db('recipe').listCollections();
+		collection.toArray((error, response) => {
 			if(error) { throw error }
 
-			callback(result)
+			callback(response)
 			client.close()
 		})
 	})
 }
 
-module.exports = {saveRecipeMongoDB}
+module.exports = {getRecipesMongoDB}
