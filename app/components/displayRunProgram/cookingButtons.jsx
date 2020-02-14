@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, View, Button, TouchableHighlight} from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-const RunProgramCard = ({startCooking, goBackToRecipes}) => {
+const CookingButtons = ({hotplateSettings, option}) => {
 
 	return (
-		<View>
-			<Text>kalas kalas kalas kalas kalas</Text>
-			<Button title="Start cooking" onPress={() => startCooking()}></Button>
-			<Button title="change different recipe" onPress={() => goBackToRecipes()}></Button>
+		<View style={styles.viewButton}>
+			<TouchableHighlight onPress={() => hotplateSettings(option)}>
+				<Text style={styles.button}>{option}</Text>
+			</TouchableHighlight>
 		</View>
 	)
 }
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default RunProgramCard
+export default CookingButtons

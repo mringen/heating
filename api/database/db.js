@@ -1,9 +1,9 @@
 const MongoClient = require("mongodb").MongoClient;
-const uri = 'mongodb+srv://heating:98arQrJdBit3ZpqN@heating-3xpgm.mongodb.net/test?retryWrites=true&w=majority';
-const settings = { useNewUrlParser: true,  useUnifiedTopology: true };
+const {uri} = require('../config/key.js')
+const {settings} = require('../config/Settings.js');
 
 
-function getAllDataMongoDB (callback) {
+const getAllDataMongoDB = (callback) => {
 	MongoClient.connect(uri, settings, (error, client) => {
 		if(error) {	throw error }
 
